@@ -29,6 +29,8 @@ namespace AutoSales.View
 
             DataContext = viewModel;
             ViewModel = viewModel;
+
+            ViewModel.DatePicker = filterDatePicker;
         }
     }
 }
