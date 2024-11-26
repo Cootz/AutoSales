@@ -4,17 +4,22 @@ using System.Windows.Controls;
 using AutoSales.View;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using AutoSales.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AutoSales.ViewModel
 {
     public class MainViewModel : ObservableObject
     {
-        private readonly Dictionary<string, Page> loadedPages = [];
+        private readonly IServiceProvider serviceProvider;
 
         public NavigationService NavigationService { get; set; } = null!;
 
-        public MainViewModel()
+        public MainViewModel(IServiceProvider serviceProvider)
         {
+            this.serviceProvider = serviceProvider;
+
             NavigateToSalesOverviewCommand = new RelayCommand(NavigateToPage<SalesOverveiw>);
             NavigateToTestDataCommand = new RelayCommand(NavigateToPage<TestData>);
         }
@@ -22,20 +27,16 @@ namespace AutoSales.ViewModel
         public ICommand NavigateToSalesOverviewCommand { get; }
         public ICommand NavigateToTestDataCommand { get; }
 
-        private void NavigateToPage<T>() where T : Page, new()
+        private void NavigateToPage<T>() where T : Page
         {
-            string typeName = typeof(T).Name;
+            NavigationService.Navigate(serviceProvider.GetRequiredService<T>());
+        }
 
-            if (loadedPages.TryGetValue(typeName, out Page? page))
-            {
-                NavigationService.Navigate(page);
-            }
-            else
-            {
-                page = new T();
-
-                loadedPages.Add(typeName, page);
-            }
+        public Task MigrateDb()
+        {
+            AutoSalesDbContext dbContext = serviceProvider.GetRequiredService<AutoSalesDbContext>();
+            
+            return dbContext.Database.MigrateAsync();
         }
     }
 }

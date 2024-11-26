@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0">
+        <DataGrid Grid.Row="0" ItemsSource="{Binding SalesInfo}">
             
         </DataGrid>
 

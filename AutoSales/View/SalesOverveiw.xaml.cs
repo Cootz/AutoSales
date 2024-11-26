@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoSales.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace AutoSales.View
     /// </summary>
     public partial class SalesOverveiw : Page
     {
-        public SalesOverveiw()
+        private SalesViewModel ViewModel { get; }
+
+        public SalesOverveiw(SalesViewModel viewModel)
         {
             InitializeComponent();
+
+            DataContext = viewModel;
+            ViewModel = viewModel;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoSales.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,16 @@ namespace AutoSales.View
     /// </summary>
     public partial class TestData : Page
     {
-        public TestData()
+        private TestDataViewModel ViewModel { get; }
+
+        public TestData(TestDataViewModel viewModel)
         {
             InitializeComponent();
+
+            DataContext = viewModel;
+            ViewModel = viewModel;
+
+            ViewModel.QuerryTextBox = sqlQuerryTextBox;
         }
     }
 }

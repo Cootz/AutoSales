@@ -1,5 +1,7 @@
-﻿using AutoSales.View;
+﻿using AutoSales.Model;
+using AutoSales.View;
 using AutoSales.ViewModel;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,13 +20,18 @@ namespace AutoSales
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainViewModel viewModel => (MainViewModel)DataContext;
+        private MainViewModel ViewModel { get; }
 
-        public MainWindow()
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
 
-            viewModel.NavigationService = mainFrame.NavigationService;
+            DataContext = viewModel;
+
+            ViewModel = viewModel;
+            ViewModel.NavigationService = mainFrame.NavigationService;
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) => ViewModel.MigrateDb();
     }
 }
