@@ -3,6 +3,7 @@ using AutoSales.View;
 using AutoSales.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using ModernWpf;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -32,6 +33,7 @@ namespace AutoSales
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 
             MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
+
             mainWindow.Show();
         }
     }

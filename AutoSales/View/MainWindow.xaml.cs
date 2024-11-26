@@ -32,6 +32,9 @@ namespace AutoSales
             ViewModel.NavigationService = mainFrame.NavigationService;
         }
 
+        /// <summary>
+        ///  Ensures db created/migration completed after main page is loaded
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e) => ViewModel.MigrateDb();
     }
 }
