@@ -4,13 +4,10 @@ using CommunityToolkit.Mvvm.Input;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Reflection.Metadata;
 using System.Windows.Controls;
 
 namespace AutoSales.ViewModel
